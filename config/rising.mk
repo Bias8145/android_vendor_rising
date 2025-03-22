@@ -15,6 +15,13 @@ ifeq ($(WITH_PIXEL_OVERLAYS),true)
 endif
 -include vendor/google/mainline_modules/config.mk
 
+# Adblock
+PRODUCT_PACKAGES += \
+    hosts.adblock
+
+PRODUCT_COPY_FILES += \
+    vendor/rising/etc/init/init.adblock.rc:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/init/init.adblock.rc
+
 PRODUCT_SOONG_NAMESPACES += \
     vendor/rising/common
 
@@ -25,6 +32,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     Launcher3QuickStep \
     NexusLauncherRelease
+
+# Rising Walls
+PRODUCT_PACKAGES += \
+    RisingWalls \
+    Backgrounds
 
 # Product Copy
 PRODUCT_COPY_FILES += \
@@ -49,6 +61,6 @@ PRODUCT_PACKAGES += libtensorflowlite_jni
 # Allow TFLite service modules to be installed to the system partition
 PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/lib/libtensorflowlite_jni.so \
- 	system/lib64/libtensorflowlite_jni.so
- 	
+     system/lib64/libtensorflowlite_jni.so
+
 $(call inherit-product, vendor/rising/config/vars.mk)
